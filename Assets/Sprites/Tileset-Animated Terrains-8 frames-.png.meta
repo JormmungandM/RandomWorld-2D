@@ -582,7 +582,7 @@ TextureImporter:
       name: Tileset-Animated Terrains-8 frames-_22
       rect:
         serializedVersion: 2
-        x: 192
+        x: 195
         y: 224
         width: 32
         height: 32
@@ -3424,7 +3424,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tileset-Animated Terrains-8 frames-_13: 1632892856
       Tileset-Animated Terrains-8 frames-_139: 1694475446
       Tileset-Animated Terrains-8 frames-_92: 348609874
       Tileset-Animated Terrains-8 frames-_14: -715000314
@@ -3443,6 +3442,7 @@ TextureImporter:
       Tileset-Animated Terrains-8 frames-_128: 994949344
       Tileset-Animated Terrains-8 frames-_138: -723519499
       Tileset-Animated Terrains-8 frames-_141: 246644397
+      Tileset-Animated Terrains-8 frames-_122: -544706397
       Tileset-Animated Terrains-8 frames-_10: -239113739
       Tileset-Animated Terrains-8 frames-_77: -167114638
       Tileset-Animated Terrains-8 frames-_5: 1452143170
@@ -3495,11 +3495,11 @@ TextureImporter:
       Tileset-Animated Terrains-8 frames-_103: -1716723167
       Tileset-Animated Terrains-8 frames-_155: -644981847
       Tileset-Animated Terrains-8 frames-_72: 826031077
-      Tileset-Animated Terrains-8 frames-_112: 499554200
-      Tileset-Animated Terrains-8 frames-_48: -576769118
       Tileset-Animated Terrains-8 frames-_143: -1890748647
-      Tileset-Animated Terrains-8 frames-_113: -1128874507
+      Tileset-Animated Terrains-8 frames-_48: -576769118
+      Tileset-Animated Terrains-8 frames-_112: 499554200
       Tileset-Animated Terrains-8 frames-_19: -740241374
+      Tileset-Animated Terrains-8 frames-_113: -1128874507
       Tileset-Animated Terrains-8 frames-_95: 1385684722
       Tileset-Animated Terrains-8 frames-_60: -468513708
       Tileset-Animated Terrains-8 frames-_104: 1844094867
@@ -3573,14 +3573,14 @@ TextureImporter:
       Tileset-Animated Terrains-8 frames-_25: -312209878
       Tileset-Animated Terrains-8 frames-_66: -270382575
       Tileset-Animated Terrains-8 frames-_4: -91605674
-      Tileset-Animated Terrains-8 frames-_55: -1793116276
-      Tileset-Animated Terrains-8 frames-_111: -681345976
-      Tileset-Animated Terrains-8 frames-_122: -544706397
       Tileset-Animated Terrains-8 frames-_43: 292387198
+      Tileset-Animated Terrains-8 frames-_55: -1793116276
       Tileset-Animated Terrains-8 frames-_69: 1749936692
       Tileset-Animated Terrains-8 frames-_64: 1718832547
+      Tileset-Animated Terrains-8 frames-_111: -681345976
       Tileset-Animated Terrains-8 frames-_57: -1436766631
       Tileset-Animated Terrains-8 frames-_83: 569932358
+      Tileset-Animated Terrains-8 frames-_13: 1632892856
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
