@@ -28,13 +28,25 @@ public class Hit : MonoBehaviour
         {
             if(hitTime <= 0f)
             {
-                Debug.Log("Hit");
                 Slime enemy = other.GetComponent<Slime>();
-                enemy.HealthPoints -= 10;
+                enemy.HealthPoints -= Stats.Damage;
                 enemy.EnemyHited = Color.red;
                 hitTime = 0.15f;
             }
         }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (hitTime <= 0f)
+            {
+                Slime enemy = gameObject.GetComponent<Slime>();
+                Stats.HP -= enemy.Damage;
+                Stats.HeroColor = Color.red;
+                Debug.Log("Slime Hit, Player HP:" + Stats.HP);
+                hitTime = 0.5f;
+            }
+        }
+
     }
 
 }

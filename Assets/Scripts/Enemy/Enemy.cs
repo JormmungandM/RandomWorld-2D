@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected string enemyName;
     [SerializeField]
-    protected int damage;
+    protected int damage = 10;
     [SerializeField]
     protected float moveSpeed = 1.5f;
 

@@ -8,12 +8,20 @@ public class Slime : Enemy
     [SerializeField]
     private GameObject soul;
 
+    private Animator animator;
+
     private Transform target;
-    private float chaseRadius = 6;
-    private float attackRadius = 1;
+    private Rigidbody2D myRigiddody;
+    private float chaseRadius = 4;
+    private float attackRadius = 1.2f;
 
     private Color color;
     private float hitedTime;
+
+    public int Damage
+    {
+        get { return damage; }
+    }
 
     public int HealthPoints
     {
@@ -36,6 +44,8 @@ public class Slime : Enemy
     {
         color = Color.white;
         target = GameObject.FindWithTag("Player").transform;
+        myRigiddody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();    
     }
 
     // Update is called once per frame
@@ -48,11 +58,9 @@ public class Slime : Enemy
             Instantiate(soul);
             Destroy(gameObject);
         }
-       
-            
 
-        
-        gameObject.GetComponent<SpriteRenderer>().color = color;
+
+        gameObject.transform.Find("View").gameObject.GetComponent<SpriteRenderer>().color = color;
         if(hitedTime <= 0f)
         {
             color = Color.white;
@@ -67,17 +75,63 @@ public class Slime : Enemy
 
 
 
-
     void CheckDistance()
     {
-
-        if(Vector3.Distance(target.position, transform.position) <= chaseRadius &&
+        Vector3 temp;
+        if (Vector3.Distance(target.position, transform.position) <= attackRadius)
+        {
+            animator.SetBool("isAttacking", true);
+            animator.SetBool("isRunning", false);          
+            temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            ChangeAnim(temp - transform.position);
+        }
+        
+        else if (Vector3.Distance(target.position, transform.position) <= chaseRadius &&
            Vector3.Distance(target.position, transform.position) > attackRadius)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            animator.SetBool("isAttacking", false);
+            animator.SetBool("isRunning", true);
+
+            temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            ChangeAnim(temp - transform.position);
+            myRigiddody.MovePosition(temp);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
+    void ChangeAnim(Vector3 direction)
+    {
+        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if(direction.x > 0)
+            {
+                SetAnimValue(Vector2.right);
+            }
+            else if(direction.x < 0)
+            {
+                SetAnimValue(Vector2.left);
+            }
 
+        }else if(Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
+        {
+            if (direction.y > 0)
+            {
+                SetAnimValue(Vector2.up);
+            }
+            else if (direction.y < 0)
+            {
+                SetAnimValue(Vector2.down);
+            }
+        }
+    }
+
+    void SetAnimValue(Vector2 value)
+    {
+        animator.SetFloat("SlimeX", value.x);
+        animator.SetFloat("SlimeY", value.y);
+    }
 
 }

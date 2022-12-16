@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 
+
+
 public class Movement : MonoBehaviour
 {
     enum PlayerState { run, attack }
@@ -13,7 +15,6 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 8;
-
 
     private Rigidbody2D myRigidbody;
     private Vector3 change;
@@ -26,7 +27,6 @@ public class Movement : MonoBehaviour
         myRigidbody = gameObject.GetComponent<Rigidbody2D>();
         playerState = PlayerState.run;
         change = Vector3.zero;
-
     }
 
 
@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
-        if (Input.GetMouseButtonDown(0) && playerState != PlayerState.attack)
+        if (Input.GetMouseButtonDown(0) && playerState != PlayerState.attack && GameMenu.GameMenuIs == false)
         {
             StartCoroutine(AttackCO());
 
@@ -85,7 +85,7 @@ public class Movement : MonoBehaviour
         if (other.gameObject.CompareTag("Soul"))
         {
             Destroy(other.gameObject);
-            GameStat.Souls += 1;
+            Stats.Souls += 1;
         }
     }
 
