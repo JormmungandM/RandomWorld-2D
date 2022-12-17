@@ -1,1 +1,1 @@
-False;0;False;0;True;5;5;50
+True;0,3877731;True;0,1716095;False;14;17;100

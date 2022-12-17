@@ -38,7 +38,6 @@ public class Movement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && playerState != PlayerState.attack && GameMenu.GameMenuIs == false)
         {
             StartCoroutine(AttackCO());
-
         }
         if (playerState == PlayerState.run)
         {
