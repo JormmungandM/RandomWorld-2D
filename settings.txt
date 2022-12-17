@@ -1,1 +1,1 @@
-False;0;False;0;True;5;5
+False;0;False;0;True;5;5;50

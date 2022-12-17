@@ -18,6 +18,9 @@ public class Stats : MonoBehaviour
     [SerializeField]
     private GameObject gameEnd;
 
+    [SerializeField]
+    private GameObject gameWin;
+
     private const string statsFilename = "stats.txt";
     void Start()
     {
@@ -28,12 +31,18 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
 
         if(healthPoint <= 0)
         {
             Time.timeScale = 0f;
             gameEnd.SetActive(true);
+        }
+
+        if(GameStat.EnemyCount == 0)
+        {
+            Time.timeScale = 0f;
+            gameWin.SetActive(true);
         }
 
         gameObject.transform.Find("View").gameObject.GetComponent<SpriteRenderer>().color = color;
@@ -83,7 +92,7 @@ public class Stats : MonoBehaviour
 
     private void SaveStatsToFile(string file)
     {
-        string stats = $"{healthPoint};{damage};{souls};{GameStat.GameTime}";
+        string stats = $"{healthPoint};{damage};{souls};{GameStat.GameTime};{gameObject.transform.position.x};{gameObject.transform.position.y};{gameObject.transform.position.z}";
         System.IO.File.WriteAllText(file, stats);
     }
 
@@ -96,6 +105,7 @@ public class Stats : MonoBehaviour
             damage = Convert.ToInt32(stats[1]);
             souls = Convert.ToInt32(stats[2]);
             GameStat.GameTime = float.Parse(stats[3]);
+            gameObject.transform.position = new Vector3(float.Parse(stats[4]), float.Parse(stats[5]), float.Parse(stats[6]));
         }
         catch (Exception ex)
         {

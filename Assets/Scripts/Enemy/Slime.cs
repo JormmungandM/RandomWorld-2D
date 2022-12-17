@@ -56,6 +56,7 @@ public class Slime : Enemy
         {
             soul.transform.position = transform.position;
             Instantiate(soul);
+            GameStat.addEnemyDeadName = gameObject.name;   
             Destroy(gameObject);
         }
 

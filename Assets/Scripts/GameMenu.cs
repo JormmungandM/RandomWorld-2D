@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using Unity.VisualScripting;
@@ -23,6 +24,7 @@ public class GameMenu : MonoBehaviour
     private GameObject settingContent;
     private GameObject upgradeStats;
     private GameObject gameEnd;
+    private GameObject gameWin;
 
     private TMPro.TextMeshProUGUI damagePriceTitle;
     private TMPro.TextMeshProUGUI hpPriceTitle;
@@ -37,7 +39,7 @@ public class GameMenu : MonoBehaviour
     private int DamagePrice = 5;
     private int HP_Price = 5;
 
-    private int HeroHP;
+    private int HeroHP = 50;
 
     private Slider musicSlider;
     private Slider soundsSlider;
@@ -56,7 +58,7 @@ public class GameMenu : MonoBehaviour
         settingContent = GameObject.Find("SettingContent");
         upgradeStats = GameObject.Find("StatsUpgrade");
         gameEnd = GameObject.Find("GameEnd");
-        HeroHP = Stats.HP;
+        gameWin = GameObject.Find("GameWin");
 
 
 
@@ -77,6 +79,7 @@ public class GameMenu : MonoBehaviour
 
         HidePause();
         gameEnd.SetActive(false);
+        gameWin.SetActive(false);
         upgradeStats.SetActive(false);
     }
 
@@ -321,7 +324,6 @@ public class GameMenu : MonoBehaviour
     {
         if (backgroundAudio != null)
         {
-            Debug.Log(musicSlider.value);
             if (isBackgroundMusicEnabled && musicSlider.value > 0) backgroundAudio.UnPause();
             else backgroundAudio.Pause();
         }
@@ -344,7 +346,7 @@ public class GameMenu : MonoBehaviour
 
     private void SaveSettingsToFile(string file)
     {
-        string settings = $"{isBackgroundMusicEnabled};{backgroundMusicVolume};{IsSoundEnabled};{SoundsVolume};{isTimerEnabled};{DamagePrice};{HP_Price}";
+        string settings = $"{isBackgroundMusicEnabled};{backgroundMusicVolume};{IsSoundEnabled};{SoundsVolume};{isTimerEnabled};{DamagePrice};{HP_Price};{HeroHP}";
         System.IO.File.WriteAllText(file, settings);
     }
 
@@ -360,6 +362,12 @@ public class GameMenu : MonoBehaviour
             timerToggle.isOn = isTimerEnabled = Convert.ToBoolean(settings[4]);
             DamagePrice = Convert.ToInt32(settings[5]);
             HP_Price = Convert.ToInt32(settings[6]);
+            
+            HeroHP = Convert.ToInt32(settings[7]);
+            if (HeroHP < 50)
+            {
+                HeroHP = 50;
+            }
             MucisPause();
         }
         catch (Exception ex)
@@ -375,14 +383,19 @@ public class GameMenu : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameEnd.SetActive(false);
+
+        if (gameEnd.activeInHierarchy) gameEnd.SetActive(false);
+        else gameWin.SetActive(false);
+
         Stats.HeroColor = UnityEngine.Color.white;
-        Stats.HP = 50;
+        Stats.HP = HeroHP = 50;
         Stats.Damage = 5;
         Stats.Souls = 0;
         DamagePrice = 5;
         HP_Price = 5;
         GameStat.GameTime = 0f;
+        GameStat.EnemyDeadNameList = new List<string>();
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(-2.48f, -6.82f, -2.1f);
         Time.timeScale = 1f;
     }
 
